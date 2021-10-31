@@ -20,4 +20,4 @@ var t=arguments[3],e="Expected a function",n=NaN,r="[object Symbol]",i=/^\s+|\s+
 },{"./fetchCountries.js":"irxn","../template/template.hbs":"DLgK","@pnotify/core":"txz9","@pnotify/core/dist/PNotify.css":"clu1","@pnotify/core/dist/BrightTheme.css":"clu1","lodash.debounce":"PZFh"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("../src/js/padination");
 },{"./sass/main.scss":"clu1","../src/js/padination":"u2Pz"}]},{},["Focm"], null)
-//# sourceMappingURL=/goit-js-hw-12-countries/src.94d37efc.js.map
+//# sourceMappingURL=/goit-js-hw-12-countries/src.f5666160.js.map
