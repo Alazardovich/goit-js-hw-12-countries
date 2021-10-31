@@ -1,6 +1,6 @@
 import API from './fetchCountries.js'
 import tamplate from "../template/template.hbs"
-import { alert, notice, info, success, error, defaultModules } from '@pnotify/core';
+import { error } from '@pnotify/core';
 import "@pnotify/core/dist/PNotify.css";
 import "@pnotify/core/dist/BrightTheme.css";
 
@@ -11,8 +11,10 @@ const container = document.querySelector('.js-card-container');
 console.log(formRef);
 formRef.addEventListener('input', onSearchCountry);
 
+clearInput();
 function onSearchCountry(event) {
     event.preventDefault();
+    
     const form = event.currentTarget;
     const searchQuery = form.elements.query.value;
     API.fetchCountries(searchQuery)
