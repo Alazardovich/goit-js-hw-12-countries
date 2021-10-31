@@ -47,6 +47,7 @@ function renderCountriesTamplate(country) {
         return container.insertAdjacentHTML('beforeend', listName);
     }
     else if (country.length < 2) {
+        clearInput()
         const markup = tamplate(country);
         container.insertAdjacentHTML('beforeend', markup) 
     }
