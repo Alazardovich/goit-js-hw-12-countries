@@ -1,5 +1,5 @@
 {{#each this}}
-<li class="item">
+<li>
     <h1>{{name}}</h1>
     <img src='{{flag}}' alt='flag' width='340' />
     <h3>capital:</h3>
@@ -9,7 +9,7 @@
     <ol>
     <h3>languages:</h3>
     {{#each languages}}
-    <li>{{name}}</li>
+    <li class="item">{{name}}</li>
     {{/each}}
     </ol>
 </li>

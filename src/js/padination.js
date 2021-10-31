@@ -8,52 +8,61 @@ const debounce = require('lodash.debounce');
 
 const formRef = document.querySelector('.js-search-form');
 const container = document.querySelector('.js-card-container');
-console.log(formRef);
-formRef.addEventListener('input', onSearchCountry);
 
-clearInput();
+formRef.addEventListener('input', debounce(onSearchCountry, 500));
+
 function onSearchCountry(event) {
-    event.preventDefault();
-    
-    const form = event.currentTarget;
-    const searchQuery = form.elements.query.value;
-    API.fetchCountries(searchQuery)
+  const form = event.target;
+  const searchQuery = form.value;
+
+  API.fetchCountries(searchQuery)
     .then(renderCountriesTamplate)
-    .catch(err =>console.log(err))
-    // .finally(() => form.reset))
+    .catch(err => console.log(err));
 }
+
 function renderCountriesTamplate(country) {
-    
-    if (!country.length) {
-        error({
-            title: 'Incorrect request!',
-            text: 'Check if the country name is entered correctly',
-            delay: 2000,
-                });
-                return clearInput();
-    }
-    else if (country.length >= 10) {
-        error({
-            title: 'Incorrect request!',
-            text: 'Too many matches found. Please enter a more specific query!',
-            delay: 2000,
-                });
-                return clearInput();
-    }
-    else if (country.length >=2 && country.length < 10) {
-        const listName = country
+  if (!country) return clearInput();
+
+  if (country.length >= 10) {
+    error({
+      title: 'Incorrect request!',
+      text: 'Too many matches found. Please enter a more specific query!',
+      delay: 2000,
+    });
+
+    clearInput();
+    return;
+  }
+
+  if (country.length >= 2 && country.length < 10) {
+    const listName = country
       .map(el => {
         return `<li><h1>${el.name}</h1></li>`;
       })
       .join('');
-        return container.insertAdjacentHTML('beforeend', listName);
-    }
-    else if (country.length < 2) {
-        clearInput()
-        const markup = tamplate(country);
-        container.insertAdjacentHTML('beforeend', markup) 
-    }
+
+    return (container.innerHTML = listName);
+  }
+
+  if (country.length === 1) {
+    clearInput();
+    formRef.reset();
+    const markup = tamplate(country);
+    container.insertAdjacentHTML('beforeend', markup);
+
+    
+    return;
+  }
+
+  error({
+    title: 'Incorrect request!',
+    text: 'Not found!',
+    delay: 2000,
+  });
+
+  formRef.reset();
 }
-function clearInput(){
-    container.innerHTML = '';
+
+function clearInput() {
+  container.innerHTML = '';
 }
