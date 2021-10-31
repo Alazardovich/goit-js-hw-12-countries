@@ -12,6 +12,7 @@ const container = document.querySelector('.js-card-container');
 formRef.addEventListener('input', debounce(onSearchCountry, 500));
 
 function onSearchCountry(event) {
+    event.preventDefault();
   const form = event.target;
   const searchQuery = form.value;
 
@@ -35,6 +36,7 @@ function renderCountriesTamplate(country) {
   }
 
   if (country.length >= 2 && country.length < 10) {
+   
     const listName = country
       .map(el => {
         return `<li><h1>${el.name}</h1></li>`;
@@ -42,15 +44,15 @@ function renderCountriesTamplate(country) {
       .join('');
 
     return (container.innerHTML = listName);
-  }
+    }
 
   if (country.length === 1) {
     clearInput();
-    formRef.reset();
+
     const markup = tamplate(country);
     container.insertAdjacentHTML('beforeend', markup);
 
-    
+    formRef.reset();
     return;
   }
 
@@ -62,7 +64,6 @@ function renderCountriesTamplate(country) {
 
   formRef.reset();
 }
-
 function clearInput() {
   container.innerHTML = '';
-}
+} 
