@@ -2,7 +2,7 @@
 import tamplate from '../template.hbs';
 
 function fetchCountries(searchQuery) {
-    fetch(`https://restcountries.com/v2/name/${searchQuery}?limit=10`)
+    fetch(`https://restcountries.com/v2/name/${searchQuery}?pageSize=10`)
     .then(responce => responce.json()
     .then(console.log));
 }
