@@ -36,14 +36,34 @@ function renderCountriesTamplate(country) {
   }
 
   if (country.length >= 2 && country.length < 10) {
+    const countries = document.querySelector('.country');
+    const listName = country.map(el => {
+      return `<div class="country">
+      <li>
+  <h1>${el.name}</h1>
+  <img src=${el.flag} alt='flag' width='340' />
+  <h3>Capital:</h3>
+  <p>${el.capital}</p>
+  <h3>Population:</h3>
+  <p> ${el.population}</p>
+  <ol>
+  <h3>Languages:</h3>
+  <li class="item">${el.languages}</li>
+  {{/each}}
+  </ol>
+  </li>
+    </div>`;
+    
+     });
+    
+    countries.addEventListener('click', event => {
+    if(event.target.textContent === 'countries') {
    
-    const listName = country
-      .map(el => {
-        return `<li><h1>${el.name}</h1></li>`;
-      })
-      .join('');
+   console.log(listName); 
+   return (container.innerHTML = listName); 
+    }
 
-    return (container.innerHTML = listName);
+    })
     }
 
   if (country.length === 1) {
